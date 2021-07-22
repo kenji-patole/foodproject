@@ -81,15 +81,10 @@ const myButton = (
 )
 
 const index = ({navigation}) => {
+
     const renderItem = ({ item }) => (
     
-      <Pressable style={{
-          width:140,
-          height:180,
-          margin:10,
-          backgroundColor:"yellow",
-          borderRadius:10,
-      }}
+      <Pressable style={Styles.pressable}
 
         onPress={() =>navigation.navigate('Detail')}>
       
@@ -116,6 +111,7 @@ const index = ({navigation}) => {
       </Pressable>
       
     )
+
     return (
         <View>
             <FlatList
@@ -126,7 +122,20 @@ const index = ({navigation}) => {
             />
         </View>
     )
+
 }
 
 export default index
 
+
+const Styles = StyleSheet.create({
+
+  pressable:{   
+      width:140,
+      height:180,
+      margin:10,
+      backgroundColor:"yellow",
+      borderRadius:10, 
+  },
+  
+})
