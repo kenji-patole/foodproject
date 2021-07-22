@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import color from '../../assets/color';
+import Styles from './Styles'
 
 
 
@@ -46,11 +47,17 @@ const index = ({navigation}) => {
                     icon={
                         <Icon
                         name="shopping-cart"
-                        size={20}
+                        size={25}
                         color="white"
+                        style={{
+                            marginRight:20
+                        }}
                         />
                     }
                     title="Commander"
+                    titleStyle={{
+                        fontSize:20
+                    }}
                     buttonStyle={Styles.btnCommander}
                 />
             </View>
@@ -61,31 +68,3 @@ const index = ({navigation}) => {
 
 export default index
 
-const Styles = StyleSheet.create({
-    content:{   
-        flex:1,
-        backgroundColor:color.bgPrivate,
-        padding:20 
-    },
-    
-    headerContent:{
-        flex:0.7,
-        // backgroundColor:"yellow",
-        // alignItems:'center'
-    
-    },
-
-    bottomContent:{
-        flex:0.6,
-        // backgroundColor:"blue",
-        justifyContent:"flex-end"
-    },
-
-    btnCommander:{
-        borderRadius:15,
-        height:50,
-        backgroundColor:color.orange3,
-        fontSize:26,
-        fontWeight:"bold"
-    }
-})

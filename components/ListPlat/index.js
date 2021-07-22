@@ -67,8 +67,16 @@ const myButton = (
     onPress={add}
     color={color.orange3}
     backgroundColor="white"
+    animated={true}
   >
-    Ajouter
+   <View>
+      <Text style={{fontWeight:'bold'}}>Big Mac</Text>
+      <Text style={{fontWeight:'bold', 
+                  color:color.orange1,
+                  fontSize:20
+                  }}>9.99 €</Text>
+   </View>
+
   </Icon.Button>       
 )
 
@@ -87,7 +95,8 @@ const index = ({navigation}) => {
       
           <ImageBackground
             style={{
-              flex:0.5
+              flex:0.6,
+              marginTop:20
             }}
             source={require('../../images/4.png')}
             resizeMode="center"
@@ -98,8 +107,8 @@ const index = ({navigation}) => {
             justifyContent:"flex-end"
           }}>
         
-            <Text style={styles.txtListPlat}>Big Mac</Text>
-            <Text style={styles.txtPriceListPlat}>9.99 €</Text>
+            {/* <Text style={styles.txtListPlat}>Big Mac</Text>
+            <Text style={styles.txtPriceListPlat}>9.99 €</Text> */}
 
             {myButton}
 
@@ -121,50 +130,3 @@ const index = ({navigation}) => {
 
 export default index
 
-const styles = StyleSheet.create({
-    item: {
-        height:40,
-        width:100,
-        backgroundColor:color.orange3,
-        marginRight:10 ,
-        borderRadius:10,
-        padding:5
-    },
-    
-    title: {
-      fontSize: 20,
-      textAlign:'center',
-      fontWeight:'bold',
-      color:'#FFFFFF'
-    },
-
-    txtSubtitleMenu: {
-      fontSize:20,
-      fontWeight:'bold',
-      color:color.txtcolorSubTitle,
-      textAlign:"center",
-      marginBottom:40
-  },
-
-  txtSubtitleMenu: {
-      fontSize:20,
-      fontWeight:'bold',
-      color:color.txtcolorSubTitle,
-      textAlign:"left",
-      marginBottom:40
-  },
-
-  txtListPlat :{
-    fontSize:17,
-    fontWeight:'bold',
-    textAlign:'center'
-  },
-
-  txtPriceListPlat :{
-    fontSize:17,
-    fontWeight:'bold',
-    color:color.txtcolorSubTitle,
-    textAlign:'center'
-  }
-
-});

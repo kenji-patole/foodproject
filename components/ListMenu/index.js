@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 
+import styles from './styles'
+
 const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -57,20 +59,3 @@ const index = () => {
 
 export default index
 
-const styles = StyleSheet.create({
-    item: {
-        height:40,
-        width:100,
-        backgroundColor:color.orange3,
-        marginRight:10 ,
-        borderRadius:10,
-        padding:5
-    },
-    
-    title: {
-      fontSize: 20,
-      textAlign:'center',
-      fontWeight:'bold',
-      color:'#FFFFFF'
-    },
-});
