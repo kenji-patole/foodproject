@@ -6,78 +6,70 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+ import React, { useContext, useEffect, useState } from 'react'
 
 import { Icon } from 'react-native-elements'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import { FirebaseContext } from './FirebaseContext';
 
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Menu from './components/Menu';
 import Detail from './components/Detail';
 import Compte from './components/Compte';
+import Register from './components/Register';
 
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  
+  const {auth} = useContext(FirebaseContext)
+  const [user, setUser] = useState(null)
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  useEffect(() => {
+
+    const authChange = auth.onAuthStateChanged(userAuth => {
+      setUser(userAuth)
+      console.log("user :", userAuth)
+    })
+
+    return () => {
+      authChange
+    }
+  }, [])
 
   return (
+
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerShown:false
-      }}>
-        <Stack.Screen name="Welcome" component={Welcome}/>
-        <Stack.Screen name="Login" component={Login}/>
+      
+      { 
+        user !== null ? 
+        <Stack.Navigator screenOptions={{
+          headerShown:false
+        }}>
         <Stack.Screen name="Menu" component={Menu}/>
-        <Stack.Screen name="Detail" component={Detail}/>
-        <Stack.Screen name="Compte" component={Compte}/>
-      </Stack.Navigator>
+          <Stack.Screen name="Detail" component={Detail}/>
+          <Stack.Screen name="Compte" component={Compte}/>
+          </Stack.Navigator>
+        :
+          <Stack.Navigator screenOptions={{
+            headerShown:false
+          }}>
+            <Stack.Screen name="Welcome" component={Welcome}/>
+            <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="Register" component={Register}/>
+          </Stack.Navigator>
+    
+      } 
+      
+    
+
     </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

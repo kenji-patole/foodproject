@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { Button, Avatar, Header, ListItem, Icon } from 'react-native-elements';
 import { CardEcomOne } from 'react-native-card-ui';
@@ -8,6 +8,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import color from '../../assets/color';
 import Styles from './Styles'
+
+import { FirebaseContext } from '../../FirebaseContext';
 
 const dataUser = [
     {
@@ -44,6 +46,11 @@ const Item = ({ title }) => (
 
 const index = ({navigation}) => {
 
+    const {auth} = useContext(FirebaseContext)
+
+    const logOut = () => {
+        auth.signOut()
+    }
     
     const renderItem = ({ item }) => (
         <Text style={Styles.title}>{item.title}</Text>
@@ -93,6 +100,7 @@ const index = ({navigation}) => {
                         fontSize:20
                     }}
                     buttonStyle={Styles.btnCommander}
+                    onPress={logOut}
                 />
             </View>
         </View>

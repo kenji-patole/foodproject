@@ -11,23 +11,27 @@ import Styles from './Styles'
 
 const index = ({navigation}) => {
 
-    const {auth} = useContext(FirebaseContext)
+    const {auth, queryAddUser} = useContext(FirebaseContext)
+    console.log("queryAddUser", queryAddUser)
 
-    const [email, setEmail] = useState("test@dope.com")
-    const [password, setPassword] = useState("123456")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-    const connexion = () => {
+    const inscription = async () => {
 
         try {
-            auth.signInWithEmailAndPassword(email, password)
-            console.log("connexion", email, password)
+            const {user} = await auth.createUserWithEmailAndPassword(email, password)
+            await queryAddUser(user.uid, {email:user.email, date:Date.now()})
 
-        } catch (error) {
-            console.log(error.message)
-        }
-        
-    }
+        } catch(err) {
+            
+            console.log(err)
+        }  
+
+        console.log("inscription", email, password)
     
+    }
+
     return (
         
         <LinearGradient 
@@ -45,7 +49,7 @@ const index = ({navigation}) => {
                         color="#A9ACB5"
                     />
             
-                    <Text style={Styles.txtLogin}>CONNECTEZ VOUS</Text>
+                    <Text style={Styles.txtLogin}>INSCRIVEZ VOUS</Text>
                 </View>
 
                 <View style={Styles.bottomContent}>
@@ -76,17 +80,13 @@ const index = ({navigation}) => {
                         value={password}
                         
                     />
-                      <Text style={{
-                        color:"#FFFFFF",
-                        paddingLeft:180,
-                        paddingBottom:20
-                    }}>Mot de passe oublié ?</Text>
-                   
+                     
+                
                     <Button
-                        title="CONNEXION"
-                        buttonStyle={Styles.btnConnexion}
+                        title="Inscription"
+                        buttonStyle={Styles.btnInscription}
                         titleStyle={{color:color.txtcolorBtnWelcome}}
-                        onPress={connexion}
+                        onPress={inscription}
                     />
 
                 </View>

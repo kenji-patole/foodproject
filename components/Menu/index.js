@@ -18,7 +18,7 @@ const index = ({navigation}) => {
             <View style={Styles.headerContent}>
                 <Header
                     placement="left"
-                    rightComponent={<Ionicons name="menu" color={color.orange3} size={25}/>}
+                    rightComponent={<Ionicons name="menu" color={color.orange3} size={25} onPress={()=> navigation.navigate('Compte')}/>}
                     backgroundColor="#E0E0E0"
                 />
                 <Text style={Styles.txtTitleMenu}>Bonjour Kenji</Text>

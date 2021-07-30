@@ -40,6 +40,9 @@ const index = ({navigation}) => {
                     <Button
                         title="INSCRIPTION"
                         buttonStyle={Styles.btnInscription}
+                        onPress={()=> 
+                            navigation.navigate('Register')
+                        }
                     />
                 </View>
             </View>
